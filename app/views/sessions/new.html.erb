@@ -1,0 +1,20 @@
+<h1> Sign in </h2> 
+
+<form action="<%= session_url %>" method="POST">
+  <label> Username:
+    <input type='text' name='user[email]' >
+  </label>
+
+  <label> Password:
+    <input type='password' name='user[password_digest]'>
+  </label>
+
+  <input type='submit' value='login'>
+</form>
+
+<h3>
+ Sign up here -->  <a href="/users/new"> go to sign up page </a>
+</h3>
+
+
+  
