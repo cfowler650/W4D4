@@ -1,22 +1,21 @@
 class SessionsController < ApplicationController
-   skip_before_action :verify_authenticity_token  
+   skip_before_action :verify_authenticity_token 
+
   def create
-    @user = User.find_by_credentials(
+  
+    user = User.find_by_credentials(
       params[:user][:email],
       params[:user][:password]
      )
-    
-    if user.nil?
-      flash.now[:errors] = ["Incorrect username and/or password"]
-      render :new
+  
+    if user
+     log_in!(user)
+     redirect_to users_show_url[user] 
     else  
-      redirect_to users_show_url[user] 
-    end
-      
+     flash.now[:errors] = ["Incorrect username and/or password"]
+     render :new
+    end  
 
-    @user.reset_session_token! unless nil
-
-    
   end
 
 
